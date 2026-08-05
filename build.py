@@ -16,13 +16,55 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+import config
+from enrich import enrich
 from fetch_data import CN_TZ, fetch
 from render import esc, format_date_cn, render_html
+
+MAX_ITEMS = config.MAX_ITEMS
+MAX_FLASHES = config.MAX_FLASHES
 
 ROOT = Path(__file__).parent
 SITE = ROOT / "site"
 ARCHIVE = SITE / "archive"
 IMG = SITE / "img"
+
+
+def trim(data, max_items=MAX_ITEMS, max_flashes=MAX_FLASHES):
+    """
+    砍到只剩 max_items 条。
+
+    不是简单取前 N 条——那样很可能 5 条全是模型发布，论文和观点一条不剩。
+    这里在各个类别之间轮流取：先给每类拿一条，还有名额再回头拿第二条，
+    这样 5 条能覆盖到 5 个类别，扫一眼就知道今天各条线都发生了什么。
+    每类内部保持原顺序（AI HOT 已经按重要性和时间排好了）。
+    """
+    if max_items and max_items > 0:
+        picked = {}          # 版块名 -> 选中的条目
+        round_i = 0
+        remaining = max_items
+        # 轮流取，直到取满或者所有版块都被掏空
+        while remaining > 0:
+            took_this_round = False
+            for sec in data["sections"]:
+                if remaining <= 0:
+                    break
+                if round_i < len(sec["items"]):
+                    picked.setdefault(sec["label"], []).append(sec["items"][round_i])
+                    remaining -= 1
+                    took_this_round = True
+            if not took_this_round:   # 所有版块都没货了
+                break
+            round_i += 1
+
+        # 按原来的版块顺序重新组装，空版块直接丢掉
+        data["sections"] = [
+            {"label": sec["label"], "items": picked[sec["label"]]}
+            for sec in data["sections"] if sec["label"] in picked
+        ]
+
+    data["flashes"] = data.get("flashes", [])[:max_flashes] if max_flashes else []
+    return data
 
 
 def screenshot(html_path, png_path):
@@ -142,7 +184,8 @@ def mock_data():
                 {"title": "某厂发布新一代基础模型，上下文窗口拉到 200 万 token",
                  "summary": "官方给出的基准显示长文档检索准确率比上代提升明显，同时把每百万 token 的价格砍掉近四成。目前先对企业客户开放，个人开发者需要排队申请。",
                  "source": "官方博客", "url": "https://example.com/a-very-long-url-path/model-release-2026",
-                 "time_label": "3 小时前"},
+                 "time_label": "3 小时前",
+                 "comment": "价格砍四成才是重点。以前因为成本不成立的长文档处理类工具，现在可以重新算一遍账了，别等所有人都反应过来再动手。"},
                 {"title": "开源社区放出一个 7B 的推理特化模型，数学基准逼近闭源中杯",
                  "summary": "权重和训练配方全部公开，采用宽松许可证，可商用。作者强调只用了公开数据集，没有做基准污染。",
                  "source": "Hugging Face", "url": "https://example.com/open-weights-7b",
@@ -152,27 +195,36 @@ def mock_data():
                 {"title": "主流编辑器接入 Agent 模式，可以直接跨文件重构",
                  "summary": "不再是补全单个函数，而是给一句自然语言指令后自己规划改动范围、跑测试、提 PR。灰度中，需要手动打开开关。",
                  "source": "TechCrunch", "url": "https://example.com/editor-agent-mode",
-                 "time_label": "5 小时前"},
+                 "time_label": "5 小时前",
+                 "comment": "对独立开发者是实打实的提效，但灰度阶段别把它放进主干分支。先拿边角项目试两周，摸清它在哪类改动上会翻车。"},
             ]},
             {"label": "行业动态", "items": [
                 {"title": "监管机构就训练数据来源发布征求意见稿",
                  "summary": "核心是要求披露训练集里受版权保护内容的占比，并给权利人留出退出通道。意见征集期 60 天，业界普遍认为最终版会比草案宽松。",
                  "source": "路透社", "url": "https://example.com/regulation-draft",
-                 "time_label": "昨天 22:14"},
+                 "time_label": "昨天 22:14",
+                 "comment": "做内容的要留意退出通道那条。如果你的素材被拿去训练又不想被用，60 天内是唯一能表态的窗口，过了就默认同意了。"},
             ]},
             {"label": "论文研究", "items": [
                 {"title": "一篇关于稀疏注意力的论文把长序列推理显存降了一半",
                  "summary": "思路是在推理阶段动态丢弃低权重的 KV 缓存，作者在多个开源模型上复现，质量损失控制在 1% 以内。代码已开源。",
                  "source": "arXiv", "url": "https://example.com/sparse-attention-paper",
-                 "time_label": "12 小时前"},
+                 "time_label": "12 小时前",
+                 "comment": "代码开源了，本地跑模型的人可以直接用上，显存省一半意味着同样的显卡能吃更长的稿子。不跑本地的话可以跳过这条。"},
             ]},
             {"label": "技巧与观点", "items": [
                 {"title": "为什么大部分 Agent 项目死在了第二周",
                  "summary": "作者复盘了十几个内部项目，结论是失败原因很少是模型能力不够，多数是没有把任务边界和失败兜底想清楚，导致 Demo 惊艳、上线崩溃。",
                  "source": "个人博客", "url": "https://example.com/why-agents-fail",
-                 "time_label": "7 小时前"},
+                 "time_label": "7 小时前",
+                 "comment": "值得完整读一遍。如果你正准备上 Agent，先照着它那份失败清单自查，比看十篇吹爆的文章有用。"},
             ]},
         ],
+        "closing": (
+            "一句话收尾：今天真正变了的是价格，不是能力。模型层把长上下文的成本"
+            "打下来之后，去年那批「算不过账」的产品点子值得重新捡起来算一遍——"
+            "先动手的人吃的是这半年的时间差。"
+        ),
         "flashes": [
             {"title": "某云厂商下调推理实例价格", "source": "官网", "time_label": "2 小时前", "url": ""},
             {"title": "一家 AI 搜索创业公司完成新一轮融资", "source": "36氪", "time_label": "6 小时前", "url": ""},
@@ -185,6 +237,7 @@ def main():
     ap.add_argument("--date", help="补生成指定日期的日报 YYYY-MM-DD")
     ap.add_argument("--no-image", action="store_true", help="跳过截图")
     ap.add_argument("--mock", action="store_true", help="用假数据验证排版")
+    ap.add_argument("--no-comment", action="store_true", help="跳过大模型点评")
     args = ap.parse_args()
 
     ARCHIVE.mkdir(parents=True, exist_ok=True)
@@ -193,7 +246,15 @@ def main():
     print("=" * 52)
     data = mock_data() if args.mock else fetch(args.date)
 
+    raw_total = sum(len(s["items"]) for s in data["sections"])
+    data = trim(data)
     total = sum(len(s["items"]) for s in data["sections"])
+    if total < raw_total:
+        print(f"  精简：{raw_total} 条 -> 保留 {total} 条")
+
+    # 先砍条数再写点评，只为留下的条目花钱
+    if not args.no_comment:
+        data = enrich(data)
     if total == 0:
         print("! 一条内容都没有，本次不生成，直接退出")
         return 0

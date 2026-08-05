@@ -9,6 +9,7 @@ import html
 import re
 from datetime import datetime
 
+import config
 from fetch_data import CN_TZ
 
 # 每个版块配一个 emoji，扫读时更好定位
@@ -146,6 +147,45 @@ body {
 }
 .item .link a { color: #2f6fb0; text-decoration: none; }
 
+/* ---------- 点评 ---------- */
+.item .comment {
+  margin-top: 12px; padding: 13px 16px;
+  background: #fbfaf6; border-left: 3px solid #c9a227;
+  border-radius: 0 6px 6px 0;
+  font-size: 15px; line-height: 1.9; color: var(--ink-soft);
+}
+.item .comment .tag {
+  display: block; font-size: 11.5px; font-weight: 800; letter-spacing: .1em;
+  color: #a8871c; margin-bottom: 5px;
+}
+
+/* ---------- 结尾一句话 ---------- */
+.closing {
+  margin-top: 46px; padding: 24px 26px;
+  background: var(--ink); color: #f2f3f5; border-radius: 8px;
+  font-size: 16px; line-height: 1.95;
+}
+
+/* ---------- 推广区块 ---------- */
+.promo {
+  margin-top: 40px; padding: 28px 26px;
+  border: 2px solid var(--ink); border-radius: 8px;
+}
+.promo h4 { font-size: 20px; font-weight: 800; margin-bottom: 16px; }
+.promo .lines { font-size: 15.5px; line-height: 2; color: var(--ink-soft); }
+.promo .lines b { color: var(--accent); font-weight: 800; }
+.promo .subtitle {
+  margin: 18px 0 10px; font-size: 14px; font-weight: 700; color: var(--ink);
+}
+.promo ul { list-style: none; }
+.promo ul li {
+  font-size: 15px; line-height: 1.95; color: var(--ink-soft); padding: 3px 0;
+}
+.promo .cta {
+  margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line);
+  font-size: 14.5px; font-weight: 700; color: var(--accent);
+}
+
 /* ---------- 快讯 ---------- */
 .flashes { margin-top: 46px; }
 .flashes ul { list-style: none; }
@@ -191,7 +231,7 @@ def render_html(data, site_title="AI 日报"):
     a(f"""
   <div class="masthead">
     <div class="kicker"><span>AI DAILY BRIEF</span><span>{esc(d['date'])}</span></div>
-    <div class="brand">AI <span>日报</span></div>
+    <div class="brand">{esc(config.BRAND_MAIN)} <span>{esc(config.BRAND_ACCENT)}</span></div>
     <div class="dateline">{esc(format_date_cn(d['date']))}　|　{esc(d['window'])}</div>
   </div>""")
 
@@ -242,6 +282,9 @@ def render_html(data, site_title="AI 日报"):
             if it.get("url"):
                 a(f'        <div class="link">🔗 原文 | '
                   f'<a href="{esc(it["url"])}">{esc(pretty_url(it["url"]))}</a></div>')
+            if it.get("comment"):
+                a(f'        <div class="comment"><span class="tag">点评</span>'
+                  f'{esc(it["comment"])}</div>')
             a("      </div>\n    </div>")
 
         a("  </div>")
@@ -266,12 +309,39 @@ def render_html(data, site_title="AI 日报"):
               f'<span class="m">{" · ".join(tail)}</span></li>')
         a("    </ul>\n  </div>")
 
-    # ---- 页脚（AI HOT 要求公开产品做一次产品级署名）----
+    # ---- 结尾一句话 ----
+    if d.get("closing"):
+        a(f'\n  <div class="closing">{esc(d["closing"])}</div>')
+
+    # ---- 推广区块 ----
+    if config.ENABLE_PROMO:
+        a('\n  <div class="promo">')
+        a(f'    <h4>{esc(config.PROMO_TITLE)}</h4>')
+        if config.PROMO_LINES:
+            a('    <div class="lines">' +
+              "<br>".join(esc(x) for x in config.PROMO_LINES) + "</div>")
+        if config.PROMO_BENEFITS:
+            if config.PROMO_SUBTITLE:
+                a(f'    <div class="subtitle">{esc(config.PROMO_SUBTITLE)}</div>')
+            a("    <ul>" +
+              "".join(f"<li>{esc(b)}</li>" for b in config.PROMO_BENEFITS) +
+              "</ul>")
+        if config.PROMO_FOOTER:
+            a(f'    <div class="cta">{esc(config.PROMO_FOOTER)}</div>')
+        a("  </div>")
+
+    # ---- 页脚 ----
     stamp = datetime.now(CN_TZ).strftime("%Y-%m-%d %H:%M")
+    sig = f"{esc(config.SIGNATURE)}　|　" if config.SIGNATURE else ""
+    attribution = (
+        f'{sig}数据来源：<a href="https://aihot.virxact.com">AI HOT</a>'
+        f'　|　摘要由 AI 生成，引用数字与原话请回原文核对'
+        if config.ENABLE_ATTRIBUTION else ""
+    )
     a(f"""
   <div class="footer">
     <div class="stat">本期共 {total} 条 · 生成于北京时间 {stamp}</div>
-    数据来源：<a href="https://aihot.virxact.com">AI HOT</a>　|　摘要由 AI 生成，引用数字与原话请回原文核对
+    {attribution}
   </div>
 </div>
 </body>

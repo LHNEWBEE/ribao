@@ -84,27 +84,82 @@ AI HOT 的编辑版日报是**北京时间每天 08:00** 生成的，所以 work
 
 ---
 
-## 想改样式
+## 想改内容
 
-排版全在 `render.py` 里：
+绝大部分东西都在 **`config.py`** 一个文件里，改完不用碰其它代码：
 
-- 颜色、字号、间距 → 文件开头的 `CSS` 那段，`:root` 里几个变量是主色调
-- 版块前面的 emoji → `SECTION_ICONS`
-- 报头、导语、条目、页脚的结构 → `render_html()` 函数，就是拼字符串，很直白
+| 想改什么 | 改哪个 |
+|---|---|
+| 报头写「AI 日报」还是别的 | `BRAND_MAIN` / `BRAND_ACCENT` |
+| 一期留几条 | `MAX_ITEMS`（写 0 = 全要） |
+| 要不要底部快讯 | `MAX_FLASHES` |
+| 点评写给谁看 | `AUDIENCE` |
+| 点评的语气和长度 | `COMMENT_STYLE` |
+| 结尾那段总结 | `CLOSING_STYLE` |
+| 底部推广区块 | `ENABLE_PROMO` 和下面几项 |
 
-改完 `python build.py --mock` 跑一下就能看效果，不用等到第二天。
+在 GitHub 网页上改：点开 `config.py` → 右上角铅笔 → 改 → Commit。
+
+---
+
+## 点评功能（唯一要花钱的地方，可选）
+
+日报里每条下面那段「点评」和结尾的总结，AI HOT 的 API 给不了——它只提供
+标题、摘要、来源、链接这些客观信息，观点得让大模型现写。
+
+**不配也能跑**，只是没有点评，其余一切正常。
+
+### 花多少钱
+
+每天一次请求，5 条大约 1500 token 进、600 token 出。用 DeepSeek 这类模型，
+**一个月不到一块钱**。
+
+### 怎么配
+
+1. 去 DeepSeek 开放平台（或任何 OpenAI 兼容的服务）注册，充最低额度，拿一个 API Key
+2. GitHub 仓库 → Settings → Secrets and variables → Actions → New repository secret
+3. 名字填 `LLM_API_KEY`，值粘贴你的 key，保存
+
+只加这一个就够了，其它两个有默认值。想换别家再加：
+
+| Secret 名 | 不填时的默认值 | 换成别家时填什么 |
+|---|---|---|
+| `LLM_API_KEY` | 无（必填） | 你的 key |
+| `LLM_BASE_URL` | `https://api.deepseek.com/v1` | 对方的接口地址 |
+| `LLM_MODEL` | `deepseek-chat` | 对方的模型名 |
+
+只要是 OpenAI 兼容接口就能用：智谱、月之暗面、硅基流动、OpenAI 都行。
+
+### 本地测
+
+```bash
+export LLM_API_KEY=你的key
+python build.py
+python build.py --no-comment   # 临时跳过点评，省钱
+```
+
+---
+
+## 排版和样式
+
+配色、字号、间距在 `render.py` 开头的 `CSS` 那段，`:root` 里几个变量是主色调。
+版块前的 emoji 在 `SECTION_ICONS`。
+
+改完 `python build.py --mock` 跑一下就能看效果，用的是假数据，不联网也不花钱。
 
 图的宽度在 `render.py` 的 `.page { width: 760px }` 和 `build.py` 的 `viewport` 里，
-两个地方要一起改。截图用的是 2 倍图，所以最终出来是 1520px 宽，手机上看不糊。
+两个地方要一起改。截图是 2 倍图，最终 1520px 宽，手机上不糊。
 
 ---
 
 ## 文件说明
 
 ```
+config.py       个性化配置，想改内容基本都在这
 fetch_data.py   拉 API + 归一化数据（日报优先，降级到 24h 精选）
+enrich.py       调大模型写点评和结尾总结（没 key 就自动跳过）
 render.py       数据 -> HTML，所有排版都在这
-build.py        主入口：拉 -> 渲染 -> 截图 -> 更新归档首页
+build.py        主入口：拉 -> 精简 -> 点评 -> 渲染 -> 截图 -> 更新首页
 site/           产物，GitHub Pages 直接托管这个目录
   index.html      归档首页
   latest.html     最新一期（固定链接）
