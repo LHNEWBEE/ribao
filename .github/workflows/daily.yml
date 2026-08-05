@@ -40,6 +40,10 @@ jobs:
           python -m playwright install --with-deps chromium
 
       - name: 生成日报
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_BASE_URL: ${{ secrets.LLM_BASE_URL }}
+          LLM_MODEL: ${{ secrets.LLM_MODEL }}
         run: |
           if [ -n "${{ inputs.date }}" ]; then
             python build.py --date "${{ inputs.date }}"
