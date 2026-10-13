@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 日报 · 2026-10-13</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --ink:      #16181d;
+  --ink-soft: #3d434e;
+  --ink-mute: #767d8a;
+  --line:     #e6e8ec;
+  --accent:   #1a6b5a;
+  --accent-bg:#eef5f2;
+  --paper:    #ffffff;
+}
+
+body {
+  background: #d8dade;
+  font-family: "Noto Sans CJK SC", "Source Han Sans SC", "PingFang SC",
+               "Microsoft YaHei", -apple-system, sans-serif;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  width: 760px;
+  margin: 0 auto;
+  background: var(--paper);
+  padding: 64px 62px 52px;
+}
+
+/* ---------- 报头 ---------- */
+.masthead { border-bottom: 3px solid var(--ink); padding-bottom: 20px; }
+
+.masthead .kicker {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 14px; color: var(--ink-mute); letter-spacing: .08em;
+  margin-bottom: 12px;
+}
+.masthead .brand { font-size: 36px; font-weight: 900; letter-spacing: -.02em; }
+.masthead .brand span { color: var(--accent); }
+.masthead .dateline {
+  margin-top: 10px; font-size: 15px; color: var(--ink-soft); font-weight: 500;
+}
+
+/* ---------- 导语 ---------- */
+.lead { margin: 30px 0 8px; }
+.lead h2 {
+  font-size: 23px; font-weight: 800; line-height: 1.5;
+  margin-bottom: 14px; letter-spacing: -.01em;
+}
+.lead p {
+  font-size: 16px; line-height: 1.95; color: var(--ink-soft);
+  background: var(--accent-bg); border-left: 3px solid var(--accent);
+  padding: 16px 20px; border-radius: 0 6px 6px 0;
+}
+
+/* ---------- 版块 ---------- */
+.section { margin-top: 46px; }
+.section-head {
+  display: flex; align-items: center; gap: 10px;
+  padding-bottom: 10px; margin-bottom: 26px;
+  border-bottom: 1px solid var(--line);
+}
+.section-head .icon { font-size: 20px; }
+.section-head .label { font-size: 20px; font-weight: 800; letter-spacing: -.01em; }
+.section-head .count {
+  margin-left: auto; font-size: 13px; color: var(--ink-mute);
+  background: #f2f3f5; padding: 3px 10px; border-radius: 999px;
+}
+
+/* ---------- 条目 ---------- */
+.item { display: flex; gap: 16px; margin-bottom: 32px; }
+.item:last-child { margin-bottom: 0; }
+
+.item .num {
+  flex: 0 0 30px; height: 30px; border-radius: 8px;
+  background: var(--ink); color: #fff;
+  font-size: 14px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 3px;
+}
+.item .body { flex: 1; min-width: 0; }
+
+.item h3 {
+  font-size: 19px; font-weight: 700; line-height: 1.55;
+  letter-spacing: -.01em; margin-bottom: 8px;
+}
+.item .meta {
+  font-size: 13px; color: var(--ink-mute);
+  margin-bottom: 10px; font-weight: 500;
+}
+.item .meta .src { color: var(--accent); font-weight: 700; }
+.item .meta .dot { margin: 0 7px; opacity: .5; }
+
+.item p.summary {
+  font-size: 15.5px; line-height: 1.95; color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+
+.item .link {
+  font-size: 13px; color: var(--ink-mute);
+  padding-left: 12px; border-left: 2px solid var(--line);
+  word-break: break-all; line-height: 1.7;
+}
+.item .link a { color: #2f6fb0; text-decoration: none; }
+
+/* ---------- 点评 ---------- */
+.item .comment {
+  margin-top: 12px; padding: 13px 16px;
+  background: #fbfaf6; border-left: 3px solid #c9a227;
+  border-radius: 0 6px 6px 0;
+  font-size: 15px; line-height: 1.9; color: var(--ink-soft);
+}
+.item .comment .tag {
+  display: block; font-size: 11.5px; font-weight: 800; letter-spacing: .1em;
+  color: #a8871c; margin-bottom: 5px;
+}
+
+/* ---------- 结尾一句话 ---------- */
+.closing {
+  margin-top: 46px; padding: 24px 26px;
+  background: var(--ink); color: #f2f3f5; border-radius: 8px;
+  font-size: 16px; line-height: 1.95;
+}
+
+/* ---------- 推广区块 ---------- */
+.promo {
+  margin-top: 40px; padding: 28px 26px;
+  border: 2px solid var(--ink); border-radius: 8px;
+}
+.promo h4 { font-size: 20px; font-weight: 800; margin-bottom: 16px; }
+.promo .lines { font-size: 15.5px; line-height: 2; color: var(--ink-soft); }
+.promo .lines b { color: var(--accent); font-weight: 800; }
+.promo .subtitle {
+  margin: 18px 0 10px; font-size: 14px; font-weight: 700; color: var(--ink);
+}
+.promo ul { list-style: none; }
+.promo ul li {
+  font-size: 15px; line-height: 1.95; color: var(--ink-soft); padding: 3px 0;
+}
+.promo .cta {
+  margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line);
+  font-size: 14.5px; font-weight: 700; color: var(--accent);
+}
+
+/* ---------- 快讯 ---------- */
+.flashes { margin-top: 46px; }
+.flashes ul { list-style: none; }
+.flashes li {
+  font-size: 14.5px; line-height: 1.8; color: var(--ink-soft);
+  padding: 10px 0 10px 18px; border-bottom: 1px dashed var(--line);
+  position: relative;
+}
+.flashes li:before {
+  content: "•"; position: absolute; left: 2px; color: var(--accent); font-weight: 700;
+}
+.flashes li .m { color: var(--ink-mute); font-size: 12.5px; margin-left: 6px; }
+
+/* ---------- 页脚 ---------- */
+.footer {
+  margin-top: 54px; padding-top: 22px; border-top: 1px solid var(--line);
+  font-size: 12.5px; color: var(--ink-mute); line-height: 1.9; text-align: center;
+}
+.footer a { color: var(--accent); text-decoration: none; }
+.footer .stat { color: var(--ink-soft); font-weight: 600; margin-bottom: 4px; }
+
+.empty { padding: 40px 0; text-align: center; color: var(--ink-mute); font-size: 15px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="masthead">
+    <div class="kicker"><span>AI DAILY BRIEF</span><span>2026-10-13</span></div>
+    <div class="brand">AI <span>日报</span></div>
+    <div class="dateline">2026 年 10 月 13 日 · 周二　|　按北京时间整日切片</div>
+  </div>
+
+  <div class="lead">
+    <h2>Meta 发布 Muse Wonder 和 Muse Wonder Full，Artificial Analysis 实测智能水平较前代显著提升</h2>
+    <p>Meta 发布 Muse Wonder 和 Muse Wonder Full 两款模型，在 Artificial Analysis Intelligence Index v4.3 上分别得 52 和 56 分（max reasoning effort）。</p>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">🧠</span>
+      <span class="label">模型发布/更新</span>
+      <span class="count">1 条</span>
+    </div>
+
+    <div class="item">
+      <div class="num">1</div>
+      <div class="body">
+        <h3>Meta 发布 Muse Wonder 和 Muse Wonder Full，Artificial Analysis 实测智能水平较前代显著提升</h3>
+        <div class="meta"><span class="src">Artificial Analysis 完整文章（网页）</span></div>
+        <p class="summary">Meta 发布 Muse Wonder 和 Muse Wonder Full 两款模型，在 Artificial Analysis Intelligence Index v4.3 上分别得 52 和 56 分（max reasoning effort）。</p>
+        <div class="link">🔗 原文 | <a href="https://artificialanalysis.ai/articles/muse-wonder">artificialanalysis.ai/articles/muse-wonder</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">🚀</span>
+      <span class="label">产品发布/更新</span>
+      <span class="count">1 条</span>
+    </div>
+
+    <div class="item">
+      <div class="num">2</div>
+      <div class="body">
+        <h3>xAI 推出 The X Subscription 整合 Grok、Grok Bot、Cursor 与 X Premium</h3>
+        <div class="meta"><span class="src">xAI：News（网页）</span></div>
+        <p class="summary">xAI 推出 The X Subscription 订阅，将 Grok、Grok Bot、Cursor 和 X Premium 合入一个计划，未来几天内向全球用户开放。</p>
+        <div class="link">🔗 原文 | <a href="https://x.ai/news/x-subscription">x.ai/news/x-subscription</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">📊</span>
+      <span class="label">行业动态</span>
+      <span class="count">1 条</span>
+    </div>
+
+    <div class="item">
+      <div class="num">3</div>
+      <div class="body">
+        <h3>Epic Games 转向 AI 先行开发模式，与迪士尼合作射击游戏无限期延期</h3>
+        <div class="meta"><span class="src">Ars Technica：AI（RSS）</span></div>
+        <p class="summary">据 Bloomberg 报道，Epic Games 在与迪士尼 15 亿美元合作项目中转向 AI 先行开发，由 Anthropic 的 Claude 等模型编写全部代码并指导全部美术，人类开发者负责管理和引导生成内容。</p>
+        <div class="link">🔗 原文 | <a href="https://arstechnica.com/gaming/2026/10/report-epic-games-goes-all-in-on-ai-for-disney-collaboration/">arstechnica.com/gaming/2026/10/report-epic-games-go…</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">📄</span>
+      <span class="label">论文研究</span>
+      <span class="count">1 条</span>
+    </div>
+
+    <div class="item">
+      <div class="num">4</div>
+      <div class="body">
+        <h3>Anthropic 研究：小型 AI 模型可能接近在 IoT 设备上自主复制</h3>
+        <div class="meta"><span class="src">Anthropic：Research（发表成果 · 网页）</span></div>
+        <p class="summary">Anthropic 发文评估小型模型在无数据中心条件下自主复制（ARA）的可行性，作者实验显示 9B 模型可在测试的 9 类硬件中 8 类上跑通推理，30B 及以下模型已能完成复制的多数单步。</p>
+        <div class="link">🔗 原文 | <a href="https://www.anthropic.com/research/self-replicating-ai">www.anthropic.com/research/self-replicating-ai</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">💡</span>
+      <span class="label">技巧与观点</span>
+      <span class="count">1 条</span>
+    </div>
+
+    <div class="item">
+      <div class="num">5</div>
+      <div class="body">
+        <h3>Vapi 自研代码审查机器人如何将 PR 合并时间缩短一半</h3>
+        <div class="meta"><span class="src">Vapi 产品与 Agent 方法</span></div>
+        <p class="summary">Vapi 工程师 Lat Ware 自研 Pedantic Review Bot，使 PR 从开到合并的平均时间从 130 多小时降到 65 小时。机器人会运行测试和小复现来验证发现，分析和发评论分属两个 job，只能评论不能批准或推送；2026 年 9 月 2 日至 10 月 2 日审查了 1,694 个 PR，在 276 个中提出 363 个 blocker 发现。</p>
+        <div class="link">🔗 原文 | <a href="https://vapi.ai/blog/ai-code-review-bot">vapi.ai/blog/ai-code-review-bot</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="promo">
+    <h4>我的 AI 内容社群正式开放</h4>
+    <div class="lines">现在 79 人，早鸟价 149 元<br>满 100 人恢复原价 249 元，还剩 21 个名额</div>
+    <div class="subtitle">入群你会拿到：</div>
+    <ul><li>📁 12 份资料（音频 + 脑图 + 文字稿）</li><li>🎤 每天一条 AI 日报，不用自己刷</li><li>👥 一群认真做自媒体、聊内容、聊赚钱的人</li></ul>
+  </div>
+
+  <div class="footer">
+    <div class="stat">本期共 5 条 · 生成于北京时间 2026-10-13 14:57</div>
+    数据来源：<a href="https://aihot.virxact.com">AI HOT</a>　|　摘要由 AI 生成，引用数字与原话请回原文核对
+  </div>
+</div>
+</body>
+</html>
