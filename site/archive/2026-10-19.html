@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 日报 · 2026-10-19</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --ink:      #16181d;
+  --ink-soft: #3d434e;
+  --ink-mute: #767d8a;
+  --line:     #e6e8ec;
+  --accent:   #1a6b5a;
+  --accent-bg:#eef5f2;
+  --paper:    #ffffff;
+}
+
+body {
+  background: #d8dade;
+  font-family: "Noto Sans CJK SC", "Source Han Sans SC", "PingFang SC",
+               "Microsoft YaHei", -apple-system, sans-serif;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  width: 760px;
+  margin: 0 auto;
+  background: var(--paper);
+  padding: 64px 62px 52px;
+}
+
+/* ---------- 报头 ---------- */
+.masthead { border-bottom: 3px solid var(--ink); padding-bottom: 20px; }
+
+.masthead .kicker {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 14px; color: var(--ink-mute); letter-spacing: .08em;
+  margin-bottom: 12px;
+}
+.masthead .brand { font-size: 36px; font-weight: 900; letter-spacing: -.02em; }
+.masthead .brand span { color: var(--accent); }
+.masthead .dateline {
+  margin-top: 10px; font-size: 15px; color: var(--ink-soft); font-weight: 500;
+}
+
+/* ---------- 导语 ---------- */
+.lead { margin: 30px 0 8px; }
+.lead h2 {
+  font-size: 23px; font-weight: 800; line-height: 1.5;
+  margin-bottom: 14px; letter-spacing: -.01em;
+}
+.lead p {
+  font-size: 16px; line-height: 1.95; color: var(--ink-soft);
+  background: var(--accent-bg); border-left: 3px solid var(--accent);
+  padding: 16px 20px; border-radius: 0 6px 6px 0;
+}
+
+/* ---------- 版块 ---------- */
+.section { margin-top: 46px; }
+.section-head {
+  display: flex; align-items: center; gap: 10px;
+  padding-bottom: 10px; margin-bottom: 26px;
+  border-bottom: 1px solid var(--line);
+}
+.section-head .icon { font-size: 20px; }
+.section-head .label { font-size: 20px; font-weight: 800; letter-spacing: -.01em; }
+.section-head .count {
+  margin-left: auto; font-size: 13px; color: var(--ink-mute);
+  background: #f2f3f5; padding: 3px 10px; border-radius: 999px;
+}
+
+/* ---------- 条目 ---------- */
+.item { display: flex; gap: 16px; margin-bottom: 32px; }
+.item:last-child { margin-bottom: 0; }
+
+.item .num {
+  flex: 0 0 30px; height: 30px; border-radius: 8px;
+  background: var(--ink); color: #fff;
+  font-size: 14px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 3px;
+}
+.item .body { flex: 1; min-width: 0; }
+
+.item h3 {
+  font-size: 19px; font-weight: 700; line-height: 1.55;
+  letter-spacing: -.01em; margin-bottom: 8px;
+}
+.item .meta {
+  font-size: 13px; color: var(--ink-mute);
+  margin-bottom: 10px; font-weight: 500;
+}
+.item .meta .src { color: var(--accent); font-weight: 700; }
+.item .meta .dot { margin: 0 7px; opacity: .5; }
+
+.item p.summary {
+  font-size: 15.5px; line-height: 1.95; color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+
+.item .link {
+  font-size: 13px; color: var(--ink-mute);
+  padding-left: 12px; border-left: 2px solid var(--line);
+  word-break: break-all; line-height: 1.7;
+}
+.item .link a { color: #2f6fb0; text-decoration: none; }
+
+/* ---------- 点评 ---------- */
+.item .comment {
+  margin-top: 12px; padding: 13px 16px;
+  background: #fbfaf6; border-left: 3px solid #c9a227;
+  border-radius: 0 6px 6px 0;
+  font-size: 15px; line-height: 1.9; color: var(--ink-soft);
+}
+.item .comment .tag {
+  display: block; font-size: 11.5px; font-weight: 800; letter-spacing: .1em;
+  color: #a8871c; margin-bottom: 5px;
+}
+
+/* ---------- 结尾一句话 ---------- */
+.closing {
+  margin-top: 46px; padding: 24px 26px;
+  background: var(--ink); color: #f2f3f5; border-radius: 8px;
+  font-size: 16px; line-height: 1.95;
+}
+
+/* ---------- 推广区块 ---------- */
+.promo {
+  margin-top: 40px; padding: 28px 26px;
+  border: 2px solid var(--ink); border-radius: 8px;
+}
+.promo h4 { font-size: 20px; font-weight: 800; margin-bottom: 16px; }
+.promo .lines { font-size: 15.5px; line-height: 2; color: var(--ink-soft); }
+.promo .lines b { color: var(--accent); font-weight: 800; }
+.promo .subtitle {
+  margin: 18px 0 10px; font-size: 14px; font-weight: 700; color: var(--ink);
+}
+.promo ul { list-style: none; }
+.promo ul li {
+  font-size: 15px; line-height: 1.95; color: var(--ink-soft); padding: 3px 0;
+}
+.promo .cta {
+  margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line);
+  font-size: 14.5px; font-weight: 700; color: var(--accent);
+}
+
+/* ---------- 快讯 ---------- */
+.flashes { margin-top: 46px; }
+.flashes ul { list-style: none; }
+.flashes li {
+  font-size: 14.5px; line-height: 1.8; color: var(--ink-soft);
+  padding: 10px 0 10px 18px; border-bottom: 1px dashed var(--line);
+  position: relative;
+}
+.flashes li:before {
+  content: "•"; position: absolute; left: 2px; color: var(--accent); font-weight: 700;
+}
+.flashes li .m { color: var(--ink-mute); font-size: 12.5px; margin-left: 6px; }
+
+/* ---------- 页脚 ---------- */
+.footer {
+  margin-top: 54px; padding-top: 22px; border-top: 1px solid var(--line);
+  font-size: 12.5px; color: var(--ink-mute); line-height: 1.9; text-align: center;
+}
+.footer a { color: var(--accent); text-decoration: none; }
+.footer .stat { color: var(--ink-soft); font-weight: 600; margin-bottom: 4px; }
+
+.empty { padding: 40px 0; text-align: center; color: var(--ink-mute); font-size: 15px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="masthead">
+    <div class="kicker"><span>AI DAILY BRIEF</span><span>2026-10-19</span></div>
+    <div class="brand">AI <span>日报</span></div>
+    <div class="dateline">2026 年 10 月 19 日 · 周一　|　按北京时间整日切片</div>
+  </div>
+
+  <div class="lead">
+    <h2>Anthropic 内部研究显示初级技术岗位占比下降，AI Agent 工时达员工六倍</h2>
+    <p>Anthropic 发布内部研究称，技术部门初级岗位占比从 2025 年初的 21% 降至 14%，新招初级占比从 27% 降至 9%，空缺初级职位降至 6%，非技术部门基本稳定。</p>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">📊</span>
+      <span class="label">行业动态</span>
+      <span class="count">2 条</span>
+    </div>
+
+    <div class="item">
+      <div class="num">1</div>
+      <div class="body">
+        <h3>Anthropic 内部研究显示初级技术岗位占比下降，AI Agent 工时达员工六倍</h3>
+        <div class="meta"><span class="src">The Decoder：AI News（RSS）</span></div>
+        <p class="summary">Anthropic 发布内部研究称，技术部门初级岗位占比从 2025 年初的 21% 降至 14%，新招初级占比从 27% 降至 9%，空缺初级职位降至 6%，非技术部门基本稳定。</p>
+        <div class="link">🔗 原文 | <a href="https://the-decoder.com/anthropic-has-nearly-stopped-hiring-junior-staff-because-ai-agents-now-work-six-times-as-many-hours/">the-decoder.com/anthropic-has-nearly-stopped-hiring…</a></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">2</div>
+      <div class="body">
+        <h3>德国两家法院先后裁定 Google 须为其 AI Overview 内容负责</h3>
+        <div class="meta"><span class="src">The Decoder：AI News（RSS）</span></div>
+        <p class="summary">慕尼黑地区法院 I 五月底裁定 Google 的 AI 搜索摘要属于公司自己的陈述而非中立转述，Google 须为错误内容担责；Google 公开宣布上诉后实际以和解结案，未获上级法院裁决。</p>
+        <div class="link">🔗 原文 | <a href="https://the-decoder.com/two-german-courts-now-hold-google-liable-for-what-its-ai-overviews-say/">the-decoder.com/two-german-courts-now-hold-google-l…</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">💡</span>
+      <span class="label">技巧与观点</span>
+      <span class="count">1 条</span>
+    </div>
+
+    <div class="item">
+      <div class="num">3</div>
+      <div class="body">
+        <h3>Browser Use 讲解浏览器智能体的工作原理与使用时机</h3>
+        <div class="meta"><span class="src">Browser Use</span></div>
+        <p class="summary">Browser Use 发布科普文章，讲解浏览器智能体由模型、harness 和浏览器三部分组成，通过观察页面、选择动作、执行并检查结果的循环完成任务，可通过 DOM、无障碍树或截图读取页面。</p>
+        <div class="link">🔗 原文 | <a href="https://browser-use.com/posts/browser-agents">browser-use.com/posts/browser-agents</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="promo">
+    <h4>我的 AI 内容社群正式开放</h4>
+    <div class="lines">现在 79 人，早鸟价 149 元<br>满 100 人恢复原价 249 元，还剩 21 个名额</div>
+    <div class="subtitle">入群你会拿到：</div>
+    <ul><li>📁 12 份资料（音频 + 脑图 + 文字稿）</li><li>🎤 每天一条 AI 日报，不用自己刷</li><li>👥 一群认真做自媒体、聊内容、聊赚钱的人</li></ul>
+  </div>
+
+  <div class="footer">
+    <div class="stat">本期共 3 条 · 生成于北京时间 2026-10-19 13:02</div>
+    数据来源：<a href="https://aihot.virxact.com">AI HOT</a>　|　摘要由 AI 生成，引用数字与原话请回原文核对
+  </div>
+</div>
+</body>
+</html>
