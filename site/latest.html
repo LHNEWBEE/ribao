@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI 日报 · 2026-10-22</title>
+<title>AI 日报 · 2026-10-23</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 
@@ -175,48 +175,40 @@ body {
 <div class="page">
 
   <div class="masthead">
-    <div class="kicker"><span>AI DAILY BRIEF</span><span>2026-10-22</span></div>
+    <div class="kicker"><span>AI DAILY BRIEF</span><span>2026-10-23</span></div>
     <div class="brand">AI <span>日报</span></div>
-    <div class="dateline">2026 年 10 月 22 日 · 周四　|　按北京时间整日切片</div>
+    <div class="dateline">2026 年 10 月 23 日 · 周五　|　按北京时间整日切片</div>
   </div>
 
   <div class="lead">
-    <h2>OpenAI 披露 Patch the Planet 计划借助 GPT-5.6 Sol 发现 PHP 关键漏洞并协调全球修复</h2>
-    <p>OpenAI 宣布在过去两个月牵头维护者、研究者与安全厂商联盟，修复 PHP 的关键漏洞，其中 Calif 用 GPT-5.6 Sol 发现一处严重缺陷，Wiz 也独立发现并报告了这两个漏洞，PHP 维护者主导修复和发布。</p>
-  </div>
-
-  <div class="section">
-    <div class="section-head">
-      <span class="icon">🧠</span>
-      <span class="label">模型发布/更新</span>
-      <span class="count">1 条</span>
-    </div>
-
-    <div class="item">
-      <div class="num">1</div>
-      <div class="body">
-        <h3>Baseten 发布决策模型 mammoth-1（27B）和 elephant-1（9B），开源并免费试用一周</h3>
-        <div class="meta"><span class="src">Baseten 工程博客（网页）</span></div>
-        <p class="summary">Baseten 研究实验室 Base Labs 发布开源决策模型 mammoth-1（27B）和 elephant-1（9B），基于 Qwen3.5-27B 和 Qwen3.5-9B 在 621 万决策样本上后训练而成。</p>
-        <div class="link">🔗 原文 | <a href="https://www.baseten.co/blog/the-best-decision-models-in-the-world-mammoth-1-and-elephant-1/">www.baseten.co/blog/the-best-decision-models-in-the…</a></div>
-      </div>
-    </div>
+    <h2>AI 挖出潜伏十几年的 PHP 底层漏洞，PHP2Shell 事件全景复盘</h2>
+    <p>作者复盘 PHP2Shell 事件：两个 CVSS 满分定为 9.2 分的 PHP 远程代码执行漏洞（CVE-2026-109618 和 CVE-2026-109619）在补丁发布前泄露，攻击演示视频外流，多国政府网站预防性下线，OpenAI 认领漏洞由 GPT-5.6 Sol 辅助发现。</p>
   </div>
 
   <div class="section">
     <div class="section-head">
       <span class="icon">🚀</span>
       <span class="label">产品发布/更新</span>
-      <span class="count">1 条</span>
+      <span class="count">2 条</span>
+    </div>
+
+    <div class="item">
+      <div class="num">1</div>
+      <div class="body">
+        <h3>OpenAI 正式发布 Decisions API，面向低延迟低成本小决策</h3>
+        <div class="meta"><span class="src">OpenAI：官网动态（RSS · 排除企业/客户案例）</span></div>
+        <p class="summary">OpenAI 宣布基于 GPT-6 Luna 的 Decisions API 正式可用，用于分类、路由、评分等有界答案问题，速度最高比通过 Responses API 使用 GPT-6 Luna 快 10x。</p>
+        <div class="link">🔗 原文 | <a href="https://openai.com/index/decisions-api">openai.com/index/decisions-api</a></div>
+      </div>
     </div>
 
     <div class="item">
       <div class="num">2</div>
       <div class="body">
-        <h3>Anthropic 开启 Claude Duet 研究预览，Claude 以主动式智能体接管日常工作</h3>
-        <div class="meta"><span class="src">Claude：Blog（网页）</span></div>
-        <p class="summary">Anthropic 开启 Claude Duet 研究预览，一款让 Claude 作为主动式智能体工作的独立应用，已登陆 iOS、Android 和 claude.ai，面向美国 Pro 和 Max 用户开放候补名单。</p>
-        <div class="link">🔗 原文 | <a href="https://claude.com/blog/claude-duet">claude.com/blog/claude-duet</a></div>
+        <h3>Claude 网页、桌面和移动端将默认启用 auto mode</h3>
+        <div class="meta"><span class="src">X：Claude (@claudeai)</span></div>
+        <p class="summary">Claude 官方宣布，下周起 Pro、Max 和 Team 套餐在 Claude 网页、桌面和移动端应用中的会话将默认以 auto mode 运行。auto mode 不再逐步请求用户批准，而是由自动检查拦截高风险操作，用户可随时切回手动模式。其引用的 Claude Code 更新提到 auto mode 用独立分类器审查 shell 命令，测试中拦截了 89% 的危险命令，手动批准为 14%。</p>
+        <div class="link">🔗 原文 | <a href="https://x.com/claudeai/status/2113360845409583307">x.com/claudeai/status/2113360845409583307</a></div>
       </div>
     </div>
   </div>
@@ -225,16 +217,26 @@ body {
     <div class="section-head">
       <span class="icon">📊</span>
       <span class="label">行业动态</span>
-      <span class="count">1 条</span>
+      <span class="count">2 条</span>
     </div>
 
     <div class="item">
       <div class="num">3</div>
       <div class="body">
-        <h3>OpenAI 披露 Patch the Planet 计划借助 GPT-5.6 Sol 发现 PHP 关键漏洞并协调全球修复</h3>
-        <div class="meta"><span class="src">OpenAI：官网动态（RSS · 排除企业/客户案例）</span></div>
-        <p class="summary">OpenAI 宣布在过去两个月牵头维护者、研究者与安全厂商联盟，修复 PHP 的关键漏洞，其中 Calif 用 GPT-5.6 Sol 发现一处严重缺陷，Wiz 也独立发现并报告了这两个漏洞，PHP 维护者主导修复和发布。</p>
-        <div class="link">🔗 原文 | <a href="https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities/">openai.com/index/coordinated-disclosure-of-critical…</a></div>
+        <h3>AI 挖出潜伏十几年的 PHP 底层漏洞，PHP2Shell 事件全景复盘</h3>
+        <div class="meta"><span class="src">X：卡兹克 (@Khazix0918)</span></div>
+        <p class="summary">作者复盘 PHP2Shell 事件：两个 CVSS 满分定为 9.2 分的 PHP 远程代码执行漏洞（CVE-2026-109618 和 CVE-2026-109619）在补丁发布前泄露，攻击演示视频外流，多国政府网站预防性下线，OpenAI 认领漏洞由 GPT-5.6 Sol 辅助发现。</p>
+        <div class="link">🔗 原文 | <a href="https://x.com/Khazix0918/status/2113096414469464281">x.com/Khazix0918/status/2113096414469464281</a></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="num">4</div>
+      <div class="body">
+        <h3>Bloomberg 报道 DeepSeek 新一轮融资约 150 亿美元</h3>
+        <div class="meta"><span class="src">X：Rohan Paul (@rohanpaul_ai)</span></div>
+        <p class="summary">据 Bloomberg，DeepSeek 最新一轮融资约 150 亿美元，为中国最大规模私募融资之一。谈判期间融资目标至少两次上调，从约 75 亿美元提高到 120 亿美元；CATL 和腾讯是最大投资方之一，CATL 据报出资约 15 亿美元。投前估值约 748 亿美元，加上 6 月完成的首轮超 75 亿美元，DeepSeek 约 6 个月内共募资约 225 亿美元。</p>
+        <div class="link">🔗 原文 | <a href="https://x.com/rohanpaul_ai/status/2113106318659928525">x.com/rohanpaul_ai/status/2113106318659928525</a></div>
       </div>
     </div>
   </div>
@@ -247,30 +249,12 @@ body {
     </div>
 
     <div class="item">
-      <div class="num">4</div>
-      <div class="body">
-        <h3>Microsoft Research 与合作者证明 31 年历史的 KLS 猜想</h3>
-        <div class="meta"><span class="src">Microsoft Research 博客（RSS）</span></div>
-        <p class="summary">Microsoft Research 的 Xinzhi Zhang 与 Zhao Song 证明 1995 年提出的 Kannan–Lovász–Simonovits（KLS）猜想，表明对数凹分布的最优平面切割与任意形状切割的差距不随维度增长，以普适常数为界。</p>
-        <div class="link">🔗 原文 | <a href="https://www.microsoft.com/en-us/research/blog/solving-a-31-year-old-grand-challenge-in-mathematics-the-kls-conjecture/">www.microsoft.com/en-us/research/blog/solving-a-31-…</a></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-head">
-      <span class="icon">💡</span>
-      <span class="label">技巧与观点</span>
-      <span class="count">1 条</span>
-    </div>
-
-    <div class="item">
       <div class="num">5</div>
       <div class="body">
-        <h3>编程 Agent 增长遭遇人类评审瓶颈：Tessl 博客解析信任赤字</h3>
-        <div class="meta"><span class="src">Tessl：产品与工程博客</span></div>
-        <p class="summary">Tessl 博客引用 Jellyfish 2026 年 9 月 AI Engineering Trends 数据指出，中位数公司已有 22% 的合并 PR 由自主编码 Agent 撰写（90 分位达 53%），但仅约 0.6% 的 PR 由 Agent 评审合并（前 10% 公司为 9%）。</p>
-        <div class="link">🔗 原文 | <a href="https://tessl.io/blog/there-arent-enough-chaperones-for-all-your-coding-agents">tessl.io/blog/there-arent-enough-chaperones-for-all…</a></div>
+        <h3>Microsoft AI 发布 SDBench 基准与 MAI-DxO 诊断系统，登 Science</h3>
+        <div class="meta"><span class="src">Microsoft AI：官方博客（网页）</span></div>
+        <p class="summary">Microsoft AI 发布 Sequential Diagnosis Benchmark（SDBench）和 AI 诊断系统 MAI-DxO，论文发表于 Science。</p>
+        <div class="link">🔗 原文 | <a href="https://microsoft.ai/news/building-medical-superintelligence/">microsoft.ai/news/building-medical-superintelligenc…</a></div>
       </div>
     </div>
   </div>
@@ -283,7 +267,7 @@ body {
   </div>
 
   <div class="footer">
-    <div class="stat">本期共 5 条 · 生成于北京时间 2026-10-22 13:08</div>
+    <div class="stat">本期共 5 条 · 生成于北京时间 2026-10-23 13:09</div>
     数据来源：<a href="https://aihot.virxact.com">AI HOT</a>　|　摘要由 AI 生成，引用数字与原话请回原文核对
   </div>
 </div>
