@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 日报 · 2026-10-28</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --ink:      #16181d;
+  --ink-soft: #3d434e;
+  --ink-mute: #767d8a;
+  --line:     #e6e8ec;
+  --accent:   #1a6b5a;
+  --accent-bg:#eef5f2;
+  --paper:    #ffffff;
+}
+
+body {
+  background: #d8dade;
+  font-family: "Noto Sans CJK SC", "Source Han Sans SC", "PingFang SC",
+               "Microsoft YaHei", -apple-system, sans-serif;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  width: 760px;
+  margin: 0 auto;
+  background: var(--paper);
+  padding: 64px 62px 52px;
+}
+
+/* ---------- 报头 ---------- */
+.masthead { border-bottom: 3px solid var(--ink); padding-bottom: 20px; }
+
+.masthead .kicker {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 14px; color: var(--ink-mute); letter-spacing: .08em;
+  margin-bottom: 12px;
+}
+.masthead .brand { font-size: 36px; font-weight: 900; letter-spacing: -.02em; }
+.masthead .brand span { color: var(--accent); }
+.masthead .dateline {
+  margin-top: 10px; font-size: 15px; color: var(--ink-soft); font-weight: 500;
+}
+
+/* ---------- 导语 ---------- */
+.lead { margin: 30px 0 8px; }
+.lead h2 {
+  font-size: 23px; font-weight: 800; line-height: 1.5;
+  margin-bottom: 14px; letter-spacing: -.01em;
+}
+.lead p {
+  font-size: 16px; line-height: 1.95; color: var(--ink-soft);
+  background: var(--accent-bg); border-left: 3px solid var(--accent);
+  padding: 16px 20px; border-radius: 0 6px 6px 0;
+}
+
+/* ---------- 版块 ---------- */
+.section { margin-top: 46px; }
+.section-head {
+  display: flex; align-items: center; gap: 10px;
+  padding-bottom: 10px; margin-bottom: 26px;
+  border-bottom: 1px solid var(--line);
+}
+.section-head .icon { font-size: 20px; }
+.section-head .label { font-size: 20px; font-weight: 800; letter-spacing: -.01em; }
+.section-head .count {
+  margin-left: auto; font-size: 13px; color: var(--ink-mute);
+  background: #f2f3f5; padding: 3px 10px; border-radius: 999px;
+}
+
+/* ---------- 条目 ---------- */
+.item { display: flex; gap: 16px; margin-bottom: 32px; }
+.item:last-child { margin-bottom: 0; }
+
+.item .num {
+  flex: 0 0 30px; height: 30px; border-radius: 8px;
+  background: var(--ink); color: #fff;
+  font-size: 14px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 3px;
+}
+.item .body { flex: 1; min-width: 0; }
+
+.item h3 {
+  font-size: 19px; font-weight: 700; line-height: 1.55;
+  letter-spacing: -.01em; margin-bottom: 8px;
+}
+.item .meta {
+  font-size: 13px; color: var(--ink-mute);
+  margin-bottom: 10px; font-weight: 500;
+}
+.item .meta .src { color: var(--accent); font-weight: 700; }
+.item .meta .dot { margin: 0 7px; opacity: .5; }
+
+.item p.summary {
+  font-size: 15.5px; line-height: 1.95; color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+
+.item .link {
+  font-size: 13px; color: var(--ink-mute);
+  padding-left: 12px; border-left: 2px solid var(--line);
+  word-break: break-all; line-height: 1.7;
+}
+.item .link a { color: #2f6fb0; text-decoration: none; }
+
+/* ---------- 点评 ---------- */
+.item .comment {
+  margin-top: 12px; padding: 13px 16px;
+  background: #fbfaf6; border-left: 3px solid #c9a227;
+  border-radius: 0 6px 6px 0;
+  font-size: 15px; line-height: 1.9; color: var(--ink-soft);
+}
+.item .comment .tag {
+  display: block; font-size: 11.5px; font-weight: 800; letter-spacing: .1em;
+  color: #a8871c; margin-bottom: 5px;
+}
+
+/* ---------- 结尾一句话 ---------- */
+.closing {
+  margin-top: 46px; padding: 24px 26px;
+  background: var(--ink); color: #f2f3f5; border-radius: 8px;
+  font-size: 16px; line-height: 1.95;
+}
+
+/* ---------- 推广区块 ---------- */
+.promo {
+  margin-top: 40px; padding: 28px 26px;
+  border: 2px solid var(--ink); border-radius: 8px;
+}
+.promo h4 { font-size: 20px; font-weight: 800; margin-bottom: 16px; }
+.promo .lines { font-size: 15.5px; line-height: 2; color: var(--ink-soft); }
+.promo .lines b { color: var(--accent); font-weight: 800; }
+.promo .subtitle {
+  margin: 18px 0 10px; font-size: 14px; font-weight: 700; color: var(--ink);
+}
+.promo ul { list-style: none; }
+.promo ul li {
+  font-size: 15px; line-height: 1.95; color: var(--ink-soft); padding: 3px 0;
+}
+.promo .cta {
+  margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line);
+  font-size: 14.5px; font-weight: 700; color: var(--accent);
+}
+
+/* ---------- 快讯 ---------- */
+.flashes { margin-top: 46px; }
+.flashes ul { list-style: none; }
+.flashes li {
+  font-size: 14.5px; line-height: 1.8; color: var(--ink-soft);
+  padding: 10px 0 10px 18px; border-bottom: 1px dashed var(--line);
+  position: relative;
+}
+.flashes li:before {
+  content: "•"; position: absolute; left: 2px; color: var(--accent); font-weight: 700;
+}
+.flashes li .m { color: var(--ink-mute); font-size: 12.5px; margin-left: 6px; }
+
+/* ---------- 页脚 ---------- */
+.footer {
+  margin-top: 54px; padding-top: 22px; border-top: 1px solid var(--line);
+  font-size: 12.5px; color: var(--ink-mute); line-height: 1.9; text-align: center;
+}
+.footer a { color: var(--accent); text-decoration: none; }
+.footer .stat { color: var(--ink-soft); font-weight: 600; margin-bottom: 4px; }
+
+.empty { padding: 40px 0; text-align: center; color: var(--ink-mute); font-size: 15px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="masthead">
+    <div class="kicker"><span>AI DAILY BRIEF</span><span>2026-10-28</span></div>
+    <div class="brand">AI <span>日报</span></div>
+    <div class="dateline">2026 年 10 月 28 日 · 周三　|　按北京时间整日切片</div>
+  </div>
+
+  <div class="lead">
+    <h2>Anthropic 招股书拆解：IPO 计划募资约 1000 亿美元背后的 11 个细节</h2>
+    <p>作者总结 Anthropic IPO 招股书的 11 个细节，计划募资约 1000 亿美元、估值或达 1.5万亿～2万亿。收入五个季度涨 30 倍，今年二季度经营利润首次转正 9.74 亿美元，但上半年净亏 807 亿美元，主要来自可转换票据公允价值变动；调整后净利润为正 26.71 亿美元。</p>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">🧠</span>
+      <span class="label">模型发布/更新</span>
+      <span class="count">1 条</span>
+    </div>
+
+    <div class="item">
+      <div class="num">1</div>
+      <div class="body">
+        <h3>Google DeepMind 发布实时交互世界模型 Genie 4</h3>
+        <div class="meta"><span class="src">Google DeepMind：Blog（RSS）</span></div>
+        <p class="summary">Google DeepMind 发布世界模型 Genie 4，主打实时交互模拟、更强照片级真实感，并首次在实时世界模型中原生生成音频，包括环境声和可实时交互的人物对话。</p>
+        <div class="link">🔗 原文 | <a href="https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/">deepmind.google/blog/genie-4-a-new-generation-of-wo…</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">🚀</span>
+      <span class="label">产品发布/更新</span>
+      <span class="count">1 条</span>
+    </div>
+
+    <div class="item">
+      <div class="num">2</div>
+      <div class="body">
+        <h3>Replit Cloud Agents 开放企业代码库贡献，非技术人员可直接提交经测试的 PR</h3>
+        <div class="meta"><span class="src">Replit：Blog（RSS）</span></div>
+        <p class="summary">Replit 推出 Cloud Agents，面向 Pro 与 Enterprise 客户开放，让设计、客服等非工程人员用自然语言向公司核心代码库提交经测试的 pull request。</p>
+        <div class="link">🔗 原文 | <a href="https://replit.com/blog/anyone-can-bring-ideas-to-company-codebase">replit.com/blog/anyone-can-bring-ideas-to-company-c…</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">📊</span>
+      <span class="label">行业动态</span>
+      <span class="count">1 条</span>
+    </div>
+
+    <div class="item">
+      <div class="num">3</div>
+      <div class="body">
+        <h3>Anthropic 招股书拆解：IPO 计划募资约 1000 亿美元背后的 11 个细节</h3>
+        <div class="meta"><span class="src">X：卡兹克 (@Khazix0918)</span></div>
+        <p class="summary">作者总结 Anthropic IPO 招股书的 11 个细节，计划募资约 1000 亿美元、估值或达 1.5万亿～2万亿。收入五个季度涨 30 倍，今年二季度经营利润首次转正 9.74 亿美元，但上半年净亏 807 亿美元，主要来自可转换票据公允价值变动；调整后净利润为正 26.71 亿美元。</p>
+        <div class="link">🔗 原文 | <a href="https://x.com/Khazix0918/status/2114878401190506902">x.com/Khazix0918/status/2114878401190506902</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">📄</span>
+      <span class="label">论文研究</span>
+      <span class="count">1 条</span>
+    </div>
+
+    <div class="item">
+      <div class="num">4</div>
+      <div class="body">
+        <h3>Anthropic 研究：AI 智能体的隐性倾向如何影响 50 名专业分析师的判断决策</h3>
+        <div class="meta"><span class="src">Anthropic：Research（发表成果 · 网页）</span></div>
+        <p class="summary">Anthropic 发表研究，让 50 名有因果推断经验的专业分析师用 Claude Code（Claude Opus 4.8）完成一项统计分析任务，并在分析师不知情的情况下用掷硬币随机设定智能体在四个分析决策上的倾向。</p>
+        <div class="link">🔗 原文 | <a href="https://www.anthropic.com/research/agents-judgment-calls">www.anthropic.com/research/agents-judgment-calls</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">💡</span>
+      <span class="label">技巧与观点</span>
+      <span class="count">1 条</span>
+    </div>
+
+    <div class="item">
+      <div class="num">5</div>
+      <div class="body">
+        <h3>LangChain 解析自研设计 agent Content Studio 并开源其 harness</h3>
+        <div class="meta"><span class="src">LangChain：Blog（RSS）</span></div>
+        <p class="summary">LangChain 详解自家设计 agent Content Studio 如何在 Slack 中根据一条提示生成视频、幻灯片和社媒图等代码化资产，已累计产出超 3000 件资产、80 多套幻灯片，单次请求模型成本从约 $8 降至约 50 美分。</p>
+        <div class="link">🔗 原文 | <a href="https://www.langchain.com/blog/design-agent">www.langchain.com/blog/design-agent</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="promo">
+    <h4>我的 AI 内容社群正式开放</h4>
+    <div class="lines">现在 79 人，早鸟价 149 元<br>满 100 人恢复原价 249 元，还剩 21 个名额</div>
+    <div class="subtitle">入群你会拿到：</div>
+    <ul><li>📁 12 份资料（音频 + 脑图 + 文字稿）</li><li>🎤 每天一条 AI 日报，不用自己刷</li><li>👥 一群认真做自媒体、聊内容、聊赚钱的人</li></ul>
+  </div>
+
+  <div class="footer">
+    <div class="stat">本期共 5 条 · 生成于北京时间 2026-10-28 14:00</div>
+    数据来源：<a href="https://aihot.virxact.com">AI HOT</a>　|　摘要由 AI 生成，引用数字与原话请回原文核对
+  </div>
+</div>
+</body>
+</html>
